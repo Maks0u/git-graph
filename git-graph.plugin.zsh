@@ -8,6 +8,7 @@ git-graph() {
 compdef _git git-graph=git-log
 # Aliases
 alias gg='git-graph'
+alias gga='git-graph --all'
 alias ggs='git-graph --all --max-count=20 | cat'
 
 # Visualize diverging branches
