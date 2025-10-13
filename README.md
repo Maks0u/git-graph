@@ -23,7 +23,7 @@ An out-of-the-box pretty `git log --graph`.
 ### [zplug](https://github.com/zplug/zplug)
 
 ```zsh
-zplug "Maks0u/git-graph"
+zplug "Maks0u/git-graph", at:main
 ```
 
 ### Oh My Zsh
