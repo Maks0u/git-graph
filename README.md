@@ -20,12 +20,6 @@ An out-of-the-box pretty `git log --graph`.
 
 ## Installation
 
-### [zplug](https://github.com/zplug/zplug)
-
-```zsh
-zplug "Maks0u/git-graph", at:main
-```
-
 ### Oh My Zsh
 
 1. Clone the repository into your oh-my-zsh custom plugins directory:
@@ -92,7 +86,6 @@ gga -S 'secret'
 
 ## Roadmap
 
-- [ ] Better handling of short hash length
 - [ ] Add customization capabilities (width, columns, etc.)
 
 ## License

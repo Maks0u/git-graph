@@ -13,14 +13,16 @@ graphWidth=$(git log --graph --pretty=format:'' "${@}" |
     sort --numeric-sort --reverse --unique |
     head -n 1)
 
+# Calculate short hash width
+hashWidth=$(git rev-parse --short HEAD | awk '{ print length }')
+
 # Configure column widths
-hashWidth=$((graphWidth + 7))
 authorWidth=12
 dateWidth=12
 
 # Setup format strings
 config="%w(${width})%C(auto)"
-hash="%>|(${hashWidth})%C(blue)%h%C(auto)"
+hash="%>|($((graphWidth + hashWidth)))%C(blue)%h%C(auto)"
 decorate="%D"
 message="%<|($((width - authorWidth - dateWidth - 2)),trunc)%s"
 author="%C(blue)%<(${authorWidth},trunc)%an%C(auto)"
