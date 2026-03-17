@@ -28,7 +28,7 @@ message="%<|($((width - authorWidth - dateWidth - 2)),trunc)%s"
 author="%C(blue)%<(${authorWidth},trunc)%an%C(auto)"
 date="%C(green)%>|($width,trunc)%ar%C(auto)"
 
-# 4. Finaler Output
+# Run git log with the calculated format
 LANG=C.UTF-8 git log --graph --color \
     --pretty=format:"${config}${hash} ${decorate}  ${message} ${author} ${date}" \
     ${1+"$@"}
