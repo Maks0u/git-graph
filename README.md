@@ -16,7 +16,71 @@ An out-of-the-box pretty `git log --graph`.
 - Git
 - Awk
 - Cat
-- tput
+- tput (optional)
+
+## Usage
+
+```bash
+git-graph
+```
+
+```bash
+gg
+```
+
+| Alias | Description                                                               |
+| ----- | ------------------------------------------------------------------------- |
+| gg    | Show a graph of the current branch.                                       |
+| gga   | Show a graph of all branches.                                             |
+| ggs   | Print the last 20 commits across all branches.                            |
+| ggb   | Visualize last common commit of diverging branches using `git merge-base` |
+
+### Configuration
+
+Customize the output using the following environment variables.
+
+| Environment variable     | Description                                                                         | Type   | Default value        |
+| ------------------------ | ----------------------------------------------------------------------------------- | ------ | -------------------- |
+| `GIT_GRAPH_WIDTH`        | Overall output width                                                                | number | Computed with `tput` |
+| `GIT_GRAPH_AUTHOR_WIDTH` | Width for the "author" column                                                       | number | 12                   |
+| `GIT_GRAPH_DATE_WIDTH`   | Width for the "date" column                                                         | number | 12                   |
+| `GIT_GRAPH_DATE_FORMAT`  | Date format using [git's `--date` syntax](https://git-scm.com/docs/pretty-formats). | string | relative             |
+
+### Examples
+
+#### Print the last 100 commits across all branches
+
+```zsh
+gga --max-count=100 | cat
+```
+
+#### Visualize merge-base of HEAD and develop branch
+
+```zsh
+ggb develop HEAD
+```
+
+![ggb.png](docs/ggb.png)
+
+#### Custom date format
+
+```bash
+GIT_GRAPH_DATE_FORMAT=iso GIT_GRAPH_DATE_WIDTH=25 git-graph
+```
+
+```bash
+GIT_GRAPH_DATE_FORMAT='format:%Y-%m-%d %H:%M' GIT_GRAPH_DATE_WIDTH=16 git-graph
+```
+
+#### Use (almost) any `git log` option
+
+```zsh
+gga --since='1 month' --date-order
+```
+
+```zsh
+gga -G 'secret'
+```
 
 ## Installation
 
@@ -36,6 +100,8 @@ plugins=(... git-graph ...)
 
 ### Manual install
 
+You can use the script on its own without installing it as a zsh plugin.
+
 ```bash
 curl --location https://raw.githubusercontent.com/Maks0u/git-graph/refs/heads/main/git-graph.sh --output /usr/local/bin/git-graph
 chmod +x /usr/local/bin/git-graph
@@ -49,44 +115,15 @@ alias gga='git-graph --all'
 alias ggs='git-graph --all --max-count=20 | cat'
 ```
 
-## Usage
-
-| Alias | Description                                                               |
-| ----- | ------------------------------------------------------------------------- |
-| gg    | Show a graph of the current branch.                                       |
-| gga   | Show a graph of all branches.                                             |
-| ggs   | Print the last 20 commits across all branches.                            |
-| ggb   | Visualize last common commit of diverging branches using `git merge-base` |
-
-### Examples
-
-#### Print the last 100 commits across all branches
-
-```zsh
-gga --max-count=100 | cat
-```
-
-#### Visualize merge-base of HEAD and develop branch
-
-```zsh
-ggb develop HEAD
-```
-
-![ggb.png](docs/ggb.png)
-
-#### Use (almost) any `git log` option
-
-```zsh
-gga --since='1 month' --date-order
-```
-
-```zsh
-gga -S 'secret'
-```
-
 ## Roadmap
 
-- [ ] Add customization capabilities (width, columns, etc.)
+- [ ] Use `HEAD` as default when providing a single argument to `ggb`
+- [ ] Column customization
+	- [x] Column widths
+	- [ ] Toggle columns
+- [x] Date format customization
+- [ ] Two lines format
+- [ ] Fix format when using `--stat`, `--compact-summary`, etc.
 
 ## License
 
