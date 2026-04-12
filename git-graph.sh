@@ -1,10 +1,8 @@
-#!/bin/bash
-set -o errexit  # abort on nonzero exitstatus
-set -o nounset  # abort on unbound variable
-set -o pipefail # don't hide errors within pipes
+#!/bin/sh
+set -eu
 
 # Calculate viewport width
-terminalWidth=$(tput cols 2>/dev/null || echo 80)
+terminalWidth=$(tput cols 2>/dev/null || printf '80')
 width=$((terminalWidth - 1))
 
 # Calculate maximum width of the graph
@@ -26,10 +24,11 @@ hash="%>|($((graphWidth + hashWidth)))%C(blue)%h%C(auto)"
 decorate="%D"
 message="%<|($((width - authorWidth - dateWidth - 2)),trunc)%s"
 author="%C(blue)%<(${authorWidth},trunc)%an%C(auto)"
-date="%C(green)%>|($width,trunc)%ar%C(auto)"
+date="%C(green)%>|(${width},trunc)%ar%C(auto)"
 
 # Run git log with the calculated format
 LANG=C.UTF-8 git log --graph --color \
     --pretty=format:"${config}${hash} ${decorate}  ${message} ${author} ${date}" \
     ${1+"$@"}
-echo
+
+printf '\n'
