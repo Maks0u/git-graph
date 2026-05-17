@@ -15,7 +15,7 @@ terminalWidth=$(tput cols 2>/dev/null || printf '80')
 width="${GIT_GRAPH_WIDTH:-$((terminalWidth - 1))}"
 
 # Calculate maximum width of the graph
-graphWidth=$(git log --graph --pretty=format:'' ${1+"$@"} |
+graphWidth=$(git log --graph --max-count=500 --pretty=format:'' ${1+"$@"} |
     awk '{ print length }' |
     sort -n -r -u |
     head -n 1)
