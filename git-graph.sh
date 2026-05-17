@@ -31,16 +31,17 @@ dateWidth="${GIT_GRAPH_DATE_WIDTH:-12}"
 dateFormat="${GIT_GRAPH_DATE_FORMAT:-relative}"
 
 # Setup format strings
-config="%w(${width})%C(auto)"
 hash="%>|($((graphWidth + hashWidth)))%C(blue)%h%C(auto)"
-decorate="%D"
-message="%<|($((width - authorWidth - dateWidth - 2)),trunc)%s"
-author="%C(blue)%<(${authorWidth},trunc)%an%C(auto)"
-date="%C(green)%>|(${width},trunc)%ad%C(auto)"
+decorate="% D"
+message="%<|($((width - authorWidth - dateWidth - 2)),trunc)% s"
+author="%C(blue)%<(${authorWidth},trunc)% an%C(auto)"
+date="%C(green)%>|(${width},trunc)% ad%C(auto)"
+
+format="${hash}${decorate}${message}${author}${date}"
 
 # Run git log with the calculated format
 LANG=C.UTF-8 git log --graph --color \
-    --pretty=format:"${config}${hash} ${decorate}  ${message} ${author} ${date}" \
+    --pretty=format:"${format}" \
     --date="${dateFormat}" \
     ${1+"$@"}
 
