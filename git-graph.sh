@@ -2,13 +2,13 @@
 set -eu
 
 # Compatibility check
-command -v git >/dev/null || ( printf 'git not found\n' && exit 1 )
-command -v awk >/dev/null || ( printf 'awk not found\n' && exit 1 )
-command -v sort >/dev/null || ( printf 'sort not found\n' && exit 1 )
-command -v head >/dev/null || ( printf 'head not found\n' && exit 1 )
+command -v git >/dev/null || ( printf 'git not found\n' >&2 && exit 1 )
+command -v awk >/dev/null || ( printf 'awk not found\n' >&2 && exit 1 )
+command -v sort >/dev/null || ( printf 'sort not found\n' >&2 && exit 1 )
+command -v head >/dev/null || ( printf 'head not found\n' >&2 && exit 1 )
 
 # Context check
-git rev-parse >/dev/null 2>&1 || ( printf 'not a git repository\n' && exit 1 )
+git rev-parse >/dev/null 2>&1 || ( printf 'not a git repository\n' >&2 && exit 1 )
 
 # Calculate viewport width
 terminalWidth=$(tput cols 2>/dev/null || printf '80')
