@@ -47,6 +47,11 @@ gga --max-count=100 | cat
 
 ```zsh
 ggb develop HEAD
+# Or
+ggb develop
+# Or
+export GIT_GRAPH_DEFAULT_BRANCH=develop
+ggb
 ```
 
 ![ggb.png](docs/ggb.png)
@@ -95,6 +100,7 @@ Customize the output using the following environment variables.
 | `GIT_GRAPH_AUTHOR_WIDTH`          | Width for the "author" column                                                                                     | number | 12                   |
 | `GIT_GRAPH_DATE_WIDTH`            | Width for the "date" column                                                                                       | number | 12                   |
 | `GIT_GRAPH_DATE_FORMAT`           | Date format using [git's `--date` syntax](https://git-scm.com/docs/pretty-formats).                               | string | relative             |
+| `GIT_GRAPH_DEFAULT_BRANCH`        | Default ref used when calling `git-graph-merge-base` (or `ggb`) with no argument.                                 | string | main                 |
 | `GIT_GRAPH_GRAPH_WIDTH_THRESHOLD` | Threshold for removing left indentation. Prevents breaking columns layout when using `--stat` or similar options. | number | 30                   |
 
 ## Installation
@@ -140,7 +146,7 @@ alias ggs='git-graph --all --max-count=20 | cat'
 
 ## Roadmap
 
-- [ ] Use `HEAD` as default when providing a single argument to `ggb`
+- [x] Use `HEAD` as default when providing a single argument to `ggb`
 - [ ] Column customization
 	- [x] Column widths
 	- [ ] Toggle columns

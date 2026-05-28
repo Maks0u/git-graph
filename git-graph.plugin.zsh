@@ -1,4 +1,4 @@
-PLUGIN_PATH="$(dirname ${0})"
+PLUGIN_PATH="$(dirname "${0}")"
 
 # git log graph with custom columns
 git-graph() {
@@ -13,7 +13,13 @@ alias ggs='git-graph --all --max-count=20 | cat'
 
 # Visualize diverging branches
 git-graph-merge-base() {
-    local base="$(git merge-base "${@}")"
+    if [[ $# -eq 0 ]]; then
+        set -- "${GIT_GRAPH_DEFAULT_BRANCH:-main}" HEAD
+    elif [[ $# -eq 1 ]]; then
+        set -- "${1}" HEAD
+    fi
+    local base
+    base="$(git merge-base --octopus "${@}")"
     "${PLUGIN_PATH}/git-graph.sh" "${@}" "${base}"^!
 }
 # Use git-log completions
