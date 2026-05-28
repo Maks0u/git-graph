@@ -54,11 +54,21 @@ ggb develop HEAD
 #### Custom date format
 
 ```bash
-GIT_GRAPH_DATE_FORMAT=iso GIT_GRAPH_DATE_WIDTH=25 git-graph
+# ISO date format
+GIT_GRAPH_DATE_WIDTH=25 git-graph --date=iso
+# Or
+export GIT_GRAPH_DATE_FORMAT=iso
+export GIT_GRAPH_DATE_WIDTH=25
+git-graph
 ```
 
 ```bash
-GIT_GRAPH_DATE_FORMAT='format:%Y-%m-%d %H:%M' GIT_GRAPH_DATE_WIDTH=16 git-graph
+# Custom date format
+GIT_GRAPH_DATE_WIDTH=16 git-graph --date='format:%Y-%m-%d %H:%M'
+# Or
+export GIT_GRAPH_DATE_FORMAT='format:%Y-%m-%d %H:%M'
+export GIT_GRAPH_DATE_WIDTH=16
+git-graph
 ```
 
 #### Use (almost) any `git log` option
@@ -69,6 +79,10 @@ gga --since='1 month' --date-order
 
 ```zsh
 gga -G 'secret'
+```
+
+```zsh
+gg --stat
 ```
 
 ### Configuration
@@ -98,6 +112,14 @@ git clone "https://github.com/Maks0u/git-graph.git" "${ZSH_CUSTOM:-~/.oh-my-zsh/
 ```zsh
 plugins=(... git-graph ...)
 ```
+
+### [Antidote](https://github.com/mattmc3/antidote) plugin manager
+
+```bash
+antidote install Maks0u/git-graph
+```
+
+Or simply add `Maks0u/git-graph` to your `.zsh_plugins.txt` file.
 
 ### Manual install
 
