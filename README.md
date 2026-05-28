@@ -35,17 +35,6 @@ gg
 | ggs   | Print the last 20 commits across all branches.                            |
 | ggb   | Visualize last common commit of diverging branches using `git merge-base` |
 
-### Configuration
-
-Customize the output using the following environment variables.
-
-| Environment variable     | Description                                                                         | Type   | Default value        |
-| ------------------------ | ----------------------------------------------------------------------------------- | ------ | -------------------- |
-| `GIT_GRAPH_WIDTH`        | Overall output width                                                                | number | Computed with `tput` |
-| `GIT_GRAPH_AUTHOR_WIDTH` | Width for the "author" column                                                       | number | 12                   |
-| `GIT_GRAPH_DATE_WIDTH`   | Width for the "date" column                                                         | number | 12                   |
-| `GIT_GRAPH_DATE_FORMAT`  | Date format using [git's `--date` syntax](https://git-scm.com/docs/pretty-formats). | string | relative             |
-
 ### Examples
 
 #### Print the last 100 commits across all branches
@@ -81,6 +70,18 @@ gga --since='1 month' --date-order
 ```zsh
 gga -G 'secret'
 ```
+
+### Configuration
+
+Customize the output using the following environment variables.
+
+| Environment variable              | Description                                                                                                       | Type   | Default value        |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------ | -------------------- |
+| `GIT_GRAPH_WIDTH`                 | Overall output width                                                                                              | number | Computed with `tput` |
+| `GIT_GRAPH_AUTHOR_WIDTH`          | Width for the "author" column                                                                                     | number | 12                   |
+| `GIT_GRAPH_DATE_WIDTH`            | Width for the "date" column                                                                                       | number | 12                   |
+| `GIT_GRAPH_DATE_FORMAT`           | Date format using [git's `--date` syntax](https://git-scm.com/docs/pretty-formats).                               | string | relative             |
+| `GIT_GRAPH_GRAPH_WIDTH_THRESHOLD` | Threshold for removing left indentation. Prevents breaking columns layout when using `--stat` or similar options. | number | 30                   |
 
 ## Installation
 
@@ -123,7 +124,7 @@ alias ggs='git-graph --all --max-count=20 | cat'
 	- [ ] Toggle columns
 - [x] Date format customization
 - [ ] Two lines format
-- [ ] Fix format when using `--stat`, `--compact-summary`, etc.
+- [x] Fix format when using `--stat`, `--compact-summary`, etc.
 
 ## License
 
