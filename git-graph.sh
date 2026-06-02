@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-IFS=$(printf '\n\t')
+IFS=$(printf ' \n\t')
 
 args=${1+"$@"}
 
