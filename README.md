@@ -144,6 +144,14 @@ alias gga='git-graph --all'
 alias ggs='git-graph --all --max-count=20 | cat'
 ```
 
+## Testing
+
+Run tests using [shellspec](https://github.com/shellspec/shellspec)
+
+```bash
+shellspec --format=documentation
+```
+
 ## Roadmap
 
 - [x] Use `HEAD` as default when providing a single argument to `ggb`
